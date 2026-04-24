@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="clock-display">
+            <div class="time" id="time">12:00:00</div>
+            <div class="date" id="date">2026-04-24</div>
+        </div>
+
+        <div class="alarm-section">
+            <h2>Alarm Settings</h2>
+            <div class="input-group">
+                <label for="alarm-hour">Hour:</label>
+                <input type="number" id="alarm-hour" min="0" max="23" value="06">
+            </div>
+            <div class="input-group">
+                <label for="alarm-minute">Minute:</label>
+                <input type="number" id="alarm-minute" min="0" max="59" value="00">
+            </div>
+            <div class="input-group">
+                <label for="alarm-second">Second:</label>
+                <input type="number" id="alarm-second" min="0" max="59" value="00">
+            </div>
+            <button id="set-alarm-btn" class="btn btn-primary">Set Alarm</button>
+        </div>
+
+        <div class="alarm-status">
+            <h3>Alarm Status</h3>
+            <p id="alarm-status-text">No alarm set</p>
+            <button id="cancel-alarm-btn" class="btn btn-danger" disabled>Cancel Alarm</button>
+        </div>
+
+        <div class="sound-control">
+            <h3>Sound Settings</h3>
+            <label for="volume">Volume:</label>
+            <input type="range" id="volume" min="0" max="100" value="50">
+            <span id="volume-value">50%</span>
+        </div>
+    </div>
+
+    <audio id="alarm-sound" src="alarm.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
