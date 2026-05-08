@@ -1,1 +1,188 @@
- 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課題研究 | サイトタイトル</title>
+    <style>
+        /* カラー変数の設定 */
+        :root {
+            --dark-green: #1a2f23;    /* メインの濃緑 */
+            --accent-green: #2d5a43;  /* 少し明るめの緑 */
+            --light-beige: #f4f7f4;   /* 背景用の薄い色 */
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-beige);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        header p {
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ナビゲーション */
+        nav {
+            background-color: var(--accent-green);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            display: block;
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            border-left: 5px solid var(--dark-green);
+            padding: 0.5rem 1rem;
+            color: var(--dark-green);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--accent-green);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .summary-box {
+            background-color: #eef2ef;
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 5px solid var(--accent-green);
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 600px) {
+            nav ul { flex-direction: column; text-align: center; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>課題研究テーマ名</h1>
+        <p>令和○年度 課題研究報告</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#intro">序論</a></li>
+            <li><a href="#method">方法</a></li>
+            <li><a href="#result">結果</a></li>
+            <li><a href="#conclusion">考察</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <section id="intro">
+            <h2>1. 序論</h2>
+            <div class="summary-box">
+                <strong>研究の目的：</strong> ここに研究の背景や解決したい課題の要約を記載します。
+            </div>
+            <p>
+                ここに本文を入力してください。濃緑をベースにすることで、図表や写真が非常に映える構成になっています。
+                余白を広めにとっているので、長文でも読みやすくなっています。
+            </p>
+        </section>
+
+        <section id="method">
+            <h2>2. 研究方法</h2>
+            <h3>使用した器具・データ</h3>
+            <ul>
+                <li>サンプルA（○○県産）</li>
+                <li>測定機器：○○センサー</li>
+                <li>分析ソフト：Excel, Python</li>
+            </ul>
+            <p>ここに具体的な実験手順や、調査方法を詳しく記載します。</p>
+        </section>
+
+        <section id="result">
+            <h2>3. 実験結果</h2>
+            <p>
+                （ここにグラフ画像などを入れると効果的です）
+            </p>
+            <p>実験によって得られたデータや、観察された現象を客観的に記述します。</p>
+        </section>
+
+        <section id="conclusion">
+            <h2>4. 考察と展望</h2>
+            <p>
+                結果から何がいえるのか、当初の仮説とどう異なっていたかを論理的に記述します。
+                今後の課題についても触れると、より研究らしくなります。
+            </p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ○○高等学校 ○年○組 氏名</p>
+    </footer>
+
+</body>
+</html> 
