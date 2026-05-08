@@ -3,51 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>課題研究 | サイトタイトル</title>
+    <title>課題研究ポータル</title>
     <style>
-        /* カラー変数の設定 */
         :root {
-            --dark-green: #1a2f23;    /* メインの濃緑 */
-            --accent-green: #2d5a43;  /* 少し明るめの緑 */
-            --light-beige: #f4f7f4;   /* 背景用の薄い色 */
-            --text-color: #333;
+            --primary-green: #1a2f23;
+            --sub-green: #2d5a43;
+            --accent-gold: #c5a059; /* 濃緑に合うアクセント色 */
+            --bg-color: #f9faf9;
             --white: #ffffff;
         }
 
+        /* 全体設定 */
+        * { box-sizing: border-box; }
         body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 1.8;
-            color: var(--text-color);
-            background-color: var(--light-beige);
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.7;
         }
 
-        /* ヘッダー */
+        /* ヘッダー：スマホでは文字を少し小さく調整 */
         header {
-            background-color: var(--dark-green);
+            background-color: var(--primary-green);
             color: var(--white);
-            padding: 4rem 2rem;
+            padding: clamp(2rem, 8vw, 4rem) 1rem;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 0.1em;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* 画面幅に合わせてサイズが変化 */
+            letter-spacing: 0.05em;
         }
 
-        header p {
-            margin-top: 1rem;
-            opacity: 0.8;
-        }
-
-        /* ナビゲーション */
+        /* ナビゲーション：スマホでは折り返し、PCでは横並び */
         nav {
-            background-color: var(--accent-green);
+            background-color: var(--sub-green);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         nav ul {
@@ -55,134 +52,127 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-wrap: wrap; /* 幅が足りない時に折り返す */
             justify-content: center;
         }
+
+        nav li { flex: 1; min-width: 100px; text-align: center; }
 
         nav a {
             display: block;
             color: var(--white);
-            padding: 1rem 2rem;
+            padding: 1rem 0.5rem;
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            background-color: var(--dark-green);
-        }
+        nav a:hover { background-color: var(--primary-green); }
 
-        /* メインコンテンツ */
-        .container {
-            max-width: 900px;
+        /* コンテンツエリア */
+        .main-wrapper {
+            max-width: 1000px;
             margin: 2rem auto;
-            padding: 2rem;
-            background-color: var(--white);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            padding: 0 1rem; /* スマホ時に端がくっつかないように */
         }
 
-        section {
-            margin-bottom: 4rem;
+        .card {
+            background: var(--white);
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
         }
 
         h2 {
-            border-left: 5px solid var(--dark-green);
-            padding: 0.5rem 1rem;
-            color: var(--dark-green);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            color: var(--accent-green);
-            border-bottom: 1px solid #ddd;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--accent-gold);
             padding-bottom: 0.5rem;
+            margin-top: 0;
         }
 
-        .summary-box {
-            background-color: #eef2ef;
-            padding: 1.5rem;
-            border-radius: 5px;
-            border-left: 5px solid var(--accent-green);
+        /* フレックスボックス：PCでは2カラム、スマホでは1カラム */
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        /* フッター */
+        .grid-item {
+            flex: 1;
+            min-width: 300px; /* 300px以下になると縦に並ぶ */
+        }
+
+        /* 画像をレスポンシブにする設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
         footer {
-            background-color: var(--dark-green);
+            background: var(--primary-green);
             color: var(--white);
             text-align: center;
-            padding: 2rem;
-            margin-top: 5rem;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
         }
 
-        /* レスポンシブ対応 */
-        @media (max-width: 600px) {
-            nav ul { flex-direction: column; text-align: center; }
-            header h1 { font-size: 1.8rem; }
+        /* 小さい画面用の微調整 */
+        @media (max-width: 480px) {
+            nav a { font-size: 0.8rem; padding: 0.8rem 0; }
+            .card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>課題研究テーマ名</h1>
-        <p>令和○年度 課題研究報告</p>
+        <h1>課題研究プロジェクト</h1>
+        <p>Research on Environment & Technology</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#intro">序論</a></li>
-            <li><a href="#method">方法</a></li>
-            <li><a href="#result">結果</a></li>
-            <li><a href="#conclusion">考察</a></li>
+            <li><a href="#section1">序論</a></li>
+            <li><a href="#section2">方法</a></li>
+            <li><a href="#section3">結果</a></li>
+            <li><a href="#section4">考察</a></li>
         </ul>
     </nav>
 
-    <div class="container">
-        
-        <section id="intro">
-            <h2>1. 序論</h2>
-            <div class="summary-box">
-                <strong>研究の目的：</strong> ここに研究の背景や解決したい課題の要約を記載します。
+    <div class="main-wrapper">
+        <section id="section1" class="card">
+            <h2>1. 研究の背景</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <p>
+                        このテンプレートは、PCで見ると横幅いっぱいに、スマホで見ると自動的に要素が縦に並ぶように設計されています。
+                        どの端末で開いても、濃緑の統一感を損なわずに閲覧可能です。
+                    </p>
+                </div>
+                <div class="grid-item">
+                    <div style="background: #eef2ef; padding: 1rem; border-radius: 8px; border: 1px dashed var(--sub-green);">
+                        <strong>💡 レスポンシブのコツ</strong><br>
+                        「width」ではなく「max-width」を使うことで、画面からはみ出るのを防いでいます。
+                    </div>
+                </div>
             </div>
-            <p>
-                ここに本文を入力してください。濃緑をベースにすることで、図表や写真が非常に映える構成になっています。
-                余白を広めにとっているので、長文でも読みやすくなっています。
-            </p>
         </section>
 
-        <section id="method">
-            <h2>2. 研究方法</h2>
-            <h3>使用した器具・データ</h3>
-            <ul>
-                <li>サンプルA（○○県産）</li>
-                <li>測定機器：○○センサー</li>
-                <li>分析ソフト：Excel, Python</li>
-            </ul>
-            <p>ここに具体的な実験手順や、調査方法を詳しく記載します。</p>
+        <section id="section2" class="card">
+            <h2>2. 実験結果の図解</h2>
+            <p>（ここに図表を配置します）</p>
+            <div style="background:#ddd; height: 200px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                画像プレースホルダー
+            </div>
         </section>
-
-        <section id="result">
-            <h2>3. 実験結果</h2>
-            <p>
-                （ここにグラフ画像などを入れると効果的です）
-            </p>
-            <p>実験によって得られたデータや、観察された現象を客観的に記述します。</p>
-        </section>
-
-        <section id="conclusion">
-            <h2>4. 考察と展望</h2>
-            <p>
-                結果から何がいえるのか、当初の仮説とどう異なっていたかを論理的に記述します。
-                今後の課題についても触れると、より研究らしくなります。
-            </p>
-        </section>
-
     </div>
 
     <footer>
-        <p>&copy; 2024 ○○高等学校 ○年○組 氏名</p>
+        <p>&copy; 2024 課題研究チーム</p>
     </footer>
 
 </body>
-</html> 
+</html>
