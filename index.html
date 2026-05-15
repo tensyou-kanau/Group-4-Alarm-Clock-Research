@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,9 +14,9 @@
             --white: #ffffff;
             --light-green: #eef2ef;
             --nav-button-bg: #244231;
+            --danger-red: #e74c3c;
         }
 
-        /* 全体設定 */
         * { box-sizing: border-box; }
         body {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
@@ -27,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* ヘッダー */
         header {
             background-color: var(--primary-green);
             color: var(--white);
@@ -39,10 +39,8 @@
             margin: 0;
             font-size: clamp(1.4rem, 5vw, 2.4rem);
             letter-spacing: 0.05em;
-            word-break: keep-all;
         }
 
-        /* ナビゲーション */
         nav {
             background-color: var(--primary-green);
             position: sticky;
@@ -59,58 +57,41 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: clamp(8px, 2vw, 15px);
-        }
-
-        nav li {
-            flex: 0 1 auto;
+            gap: 10px;
         }
 
         nav a {
             display: block;
             color: var(--white);
-            padding: 0.7rem clamp(1rem, 3vw, 2rem);
+            padding: 0.7rem 1.5rem;
             text-decoration: none;
-            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            font-size: 0.9rem;
             font-weight: bold;
             background-color: var(--nav-button-bg);
-            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            white-space: nowrap;
+            transition: all 0.3s ease;
         }
 
         nav a:hover {
             background-color: var(--accent-gold);
             color: var(--primary-green);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
-        /* レイアウト構造 */
         .container {
             max-width: 1200px;
-            margin: clamp(1rem, 4vw, 2.5rem) auto;
+            margin: 2rem auto;
             padding: 0 1rem;
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
         }
 
-        .main-content {
-            flex: 3;
-            min-width: 0;
-        }
-
-        .sidebar {
-            flex: 1;
-            min-width: 280px;
-        }
+        .main-content { flex: 3; min-width: 0; }
+        .sidebar { flex: 1; min-width: 280px; }
 
         .card {
             background: var(--white);
-            padding: clamp(1.2rem, 3vw, 2rem);
+            padding: 2rem;
             border-radius: 16px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.06);
             margin-bottom: 2rem;
@@ -121,39 +102,41 @@
             border-bottom: 2px solid var(--accent-gold);
             padding-bottom: 0.6rem;
             margin-top: 0;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.5rem;
         }
 
-        /* テーブルレスポンシブ対応 */
-        .table-container {
+        /* 投稿フォームのスタイル */
+        .diary-form {
+            background: var(--light-green);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .diary-form textarea {
             width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin: 1.5rem 0;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            border: 1px solid #eee;
+            margin-bottom: 10px;
+            font-family: inherit;
+            resize: vertical;
         }
 
-        .data-table {
-            width: 100%;
-            min-width: 450px;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        .data-table th, .data-table td {
-            border: 1px solid #eee;
-            padding: 14px 10px;
-            text-align: center;
-        }
-
-        .data-table th {
-            background-color: var(--light-green);
-            color: var(--primary-green);
+        .diary-form button {
+            background-color: var(--sub-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
             font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .diary-form button:hover {
+            background-color: var(--primary-green);
         }
 
         /* 日誌タイムライン */
@@ -164,6 +147,11 @@
             padding-left: 24px;
             position: relative;
             margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .diary-entry::before {
             content: "";
@@ -176,22 +164,38 @@
             border-radius: 50%;
             border: 2px solid var(--white);
         }
+        .diary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         .diary-date { font-weight: bold; color: var(--sub-green); font-size: 1.1rem; }
+        .delete-btn {
+            color: var(--danger-red);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        .delete-btn:hover { opacity: 1; }
+
         .diary-content { 
             background-color: var(--light-green); 
             padding: 1.2rem; 
             border-radius: 12px; 
             font-size: 0.95rem;
             margin-top: 8px;
+            word-wrap: break-word;
         }
 
         /* 予定表サイドバー */
-        .schedule-list { list-style: none; padding: 0; margin: 0; }
+        .schedule-list { list-style: none; padding: 0; }
         .schedule-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #f0f0f0;
         }
         .month-badge {
@@ -200,22 +204,11 @@
             padding: 4px 0;
             border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: bold;
             width: 45px;
-            flex-shrink: 0;
             text-align: center;
+            flex-shrink: 0;
         }
-        .schedule-text { font-size: 0.9rem; color: #444; }
-        .status-done { color: #aaa; text-decoration: line-through; }
-
-        /* 考察ボックス */
-        .conclusion-box {
-            background-color: var(--light-green);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 6px solid var(--sub-green);
-            margin: 1.5rem 0;
-        }
+        .schedule-text { font-size: 0.9rem; }
 
         footer {
             background: var(--primary-green);
@@ -223,19 +216,12 @@
             text-align: center;
             padding: 3rem 1rem;
             margin-top: 5rem;
-            font-size: 0.9rem;
         }
 
         @media (max-width: 900px) {
             .container { flex-direction: column; }
-            .main-content, .sidebar { width: 100%; flex: none; }
             .sidebar { order: 2; }
             .main-content { order: 1; }
-        }
-
-        @media (max-width: 480px) {
-            nav a { padding: 0.5rem 0.8rem; }
-            .card { padding: 1rem; }
         }
     </style>
 </head>
@@ -249,10 +235,9 @@
     <nav>
         <ul>
             <li><a href="#overview">概要</a></li>
-            <li><a href="#diary">日誌</a></li>
+            <li><a href="#diary-section">日誌</a></li>
             <li><a href="#method">方法</a></li>
             <li><a href="#result">結果</a></li>
-            <li><a href="#conclusion">考察</a></li>
         </ul>
     </nav>
 
@@ -261,130 +246,39 @@
             <section id="overview" class="card">
                 <h2>1. 研究の背景と目的</h2>
                 <p>
-                    現代社会において、質の高い睡眠とストレスのない起床は重要な課題です。本プロジェクトでは、従来の音によるアラームに頼らず、五感を活用した「次世代の目覚まし時計」の制作を目指しています。
+                    現代社会において、質の高い睡眠とストレスのない起床は重要な課題です。従来の音によるアラームに頼らず、五感を活用した「次世代の目覚まし時計」の制作を目指しています。
                 </p>
-                <div style="background: var(--light-green); padding: 1rem; border-radius: 10px; border: 1px dashed var(--sub-green); margin-top: 1rem;">
-                    <strong>研究テーマ：</strong> 次世代の目覚まし時計制作
-                </div>
             </section>
 
-            <section id="diary" class="card">
+            <section id="diary-section" class="card">
                 <h2>📅 制作日誌</h2>
-                <div class="timeline">
-                    <div class="diary-entry">
-                        <span class="diary-date">5月8日</span>
-                        <div class="diary-content">具体的なイメージ構築、プロトタイプへの製作材料調べ。現在は照度センサーの最適な配置を検証しています。</div>
-                    </div>
-                    <div class="diary-entry">
-                        <span class="diary-date">4月17日</span>
-                        <div class="diary-content">実際の班構成かつ、実際の次世代目覚まし時計の計画錯誤。コンパクトさと操作性を重視した設計を目指しています。</div>
-                    </div>
+                
+                <!-- 投稿フォーム -->
+                <div class="diary-form">
+                    <p style="margin-top:0; font-size:0.9rem; font-weight:bold;">新しい日誌を記録する</p>
+                    <textarea id="diaryInput" placeholder="今日進めた内容や、気づいたことを記入してください..."></textarea>
+                    <button onclick="addDiary()">日誌を追加</button>
+                </div>
+
+                <div class="timeline" id="diaryTimeline">
+                    <!-- JavaScriptで日誌がここに追加されます -->
                 </div>
             </section>
 
             <section id="method" class="card">
                 <h2>2. 実験・制作方法</h2>
-                <p>以下のステップで開発と検証を進めます。</p>
-                <ul style="padding-left: 1.5rem;">
-                    <li>Arduinoを用いた制御システムの構築</li>
-                    <li>段階的な光の照射による覚醒状態のモニタリング</li>
-                    <li>スマートフォンアプリとの連携機能の実装</li>
-                </ul>
-            </section>
-
-            <section id="result" class="card">
-                <h2>3. 制作結果</h2>
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>試作モデル</th>
-                                <th>起床時の不快感</th>
-                                <th>覚醒までの時間</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>従来型（音のみ）</td>
-                                <td>—</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>次世代型（光＋振動）</td>
-                                <td>—</td>
-                                <td>—</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p style="font-size: 0.85rem; color: #666; font-style: italic; text-align: right;">※本実験後のデータを反映予定</p>
-            </section>
-
-            <section id="conclusion" class="card">
-                <h2>4. 考察と展望</h2>
-                <div class="conclusion-box">
-                    <p><strong>考察：</strong> 
-                        現段階の予備テストでは、急激な音響刺激に比べて緩やかな照度変化の方が、生体に与えるストレスを低減できる可能性が考えられる。本実験にて詳細な相関関係を明らかにする。
-                    </p>
-                </div>
-                <p>
-                    今後は、取得した睡眠データを基に、個人のサイクルに合わせたアラーム時刻の最適化ロジックを検討していく予定です。
-                </p>
+                <p>Arduinoを用いた制御システムの構築と、段階的な光の照射による覚醒状態のモニタリングを行います。</p>
             </section>
         </main>
 
         <aside class="sidebar">
-            <section class="card" style="position: sticky; top: 100px;">
+            <section class="card">
                 <h2>📅 制作予定表</h2>
                 <ul class="schedule-list">
-                    <li class="schedule-item">
-                        <span class="month-badge">1月</span>
-                        <span class="schedule-text status-done">—</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">2月</span>
-                        <span class="schedule-text status-done">—</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">3月</span>
-                        <span class="schedule-text status-done">—</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">4月</span>
-                        <span class="schedule-text status-done">計画構築</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">5月</span>
-                        <span class="schedule-text">詳細な基本設計図・プログラム作成</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">6月</span>
-                        <span class="schedule-text">材料の買い出し・プログラミング作成</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">7月</span>
-                        <span class="schedule-text">就職活動</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">8月</span>
-                        <span class="schedule-text">就職活動</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">9月</span>
-                        <span class="schedule-text">試作品製作</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">10月</span>
-                        <span class="schedule-text">試作品の修正、本番製作</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">11月</span>
-                        <span class="schedule-text">本番製作</span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="month-badge">12月</span>
-                        <span class="schedule-text">完成型の最終調整、資料まとめ</span>
-                    </li>
+                    <li class="schedule-item"><span class="month-badge">9月</span><span class="schedule-text">試作品製作</span></li>
+                    <li class="schedule-item"><span class="month-badge">10月</span><span class="schedule-text">試作品の修正、本番製作</span></li>
+                    <li class="schedule-item"><span class="month-badge">11月</span><span class="schedule-text">本番製作</span></li>
+                    <li class="schedule-item"><span class="month-badge">12月</span><span class="schedule-text">完成型の最終調整、資料まとめ</span></li>
                 </ul>
             </section>
         </aside>
@@ -394,5 +288,79 @@
         <p>&copy; 2026 課題研究4班チーム</p>
     </footer>
 
+    <script>
+        // 初期の固定データ
+        const defaultDiaries = [
+            { date: "5月8日", content: "具体的なイメージ構築、プロトタイプへの製作材料調べ。現在は照度センサーの最適な配置を検証しています。" },
+            { date: "4月17日", content: "実際の班構成かつ、実際の次世代目覚まし時計の計画錯誤。コンパクトさと操作性を重視した設計を目指しています。" }
+        ];
+
+        // データの読み込み
+        let diaries = JSON.parse(localStorage.getItem('myDiaries')) || defaultDiaries;
+
+        // 画面への描画
+        function renderDiaries() {
+            const timeline = document.getElementById('diaryTimeline');
+            timeline.innerHTML = '';
+
+            diaries.forEach((item, index) => {
+                const entry = document.createElement('div');
+                entry.className = 'diary-entry';
+                entry.innerHTML = `
+                    <div class="diary-header">
+                        <span class="diary-date">${item.date}</span>
+                        ${index >= (diaries.length - defaultDiaries.length) ? '' : `<button class="delete-btn" onclick="deleteDiary(${index})">削除</button>`}
+                    </div>
+                    <div class="diary-content">${item.content}</div>
+                `;
+                timeline.appendChild(entry);
+            });
+        }
+
+        // 日誌の追加
+        function addDiary() {
+            const input = document.getElementById('diaryInput');
+            const content = input.value.trim();
+
+            if (!content) {
+                alert("内容を入力してください");
+                return;
+            }
+
+            // 今日の日付を取得
+            const now = new Date();
+            const dateStr = `${now.getMonth() + 1}月${now.getDate()}日`;
+
+            // 配列の先頭に追加
+            diaries.unshift({ date: dateStr, content: content });
+
+            // 保存
+            saveDiaries();
+            
+            // 入力欄をクリア
+            input.value = '';
+            
+            // 再描画
+            renderDiaries();
+        }
+
+        // 日誌の削除
+        function deleteDiary(index) {
+            if(confirm("この日誌を削除しますか？")) {
+                diaries.splice(index, 1);
+                saveDiaries();
+                renderDiaries();
+            }
+        }
+
+        function saveDiaries() {
+            localStorage.setItem('myDiaries', JSON.stringify(diaries));
+        }
+
+        // 初回実行
+        renderDiaries();
+    </script>
 </body>
 </html>
+
+```
